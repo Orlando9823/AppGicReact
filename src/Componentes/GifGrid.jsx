@@ -2,39 +2,39 @@ import { useFetchGif } from '../Hooks/UseFetchGif';
 import { GifItem } from "./GifItem";
 import {useRef} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import '../Styles/GifGrid.css';
 
-export const GifGrid = ({category}) => {
+export const GifGrid = ({category, setCategoria}) => {
     
-    const {image, loading, delet} = useFetchGif(category);
+    const {image, loading} = useFetchGif(category);
     const categoriasRef = useRef();
 
+    const deleteDiv = () => {
 
-    const deletDiv = () => {
-        const categorias = categoriasRef.current;
+        setCategoria((categoria) => {
 
-        if (delet == true) {
-            categorias.style.display= 'block';
-        } else {
-            categorias.style.display= 'none';
-        }
+            const h1Element = document.getElementById(category);
+            const valorH1 = h1Element.textContent;
+
+            const posicionArray = categoria.indexOf(valorH1)
+
+            console.log(posicionArray);
+
+            if (categoria.length == 1) {
+                return []
+            }
+            const myArray = [...categoria];
+            myArray.splice(posicionArray, 1);
+            return myArray
+        })
     }
-
-    // const deletDiv = ({setCategoria}) => {
-    //     setCategoria((categoria) => {
-    //         const nuevoArray = categoria.filter(category => category !== category);
-    //         setCategoria(nuevoArray);
-    //         }
-    //     );
-    // }
-
     return (
         <>
             <div className="categorias" ref={categoriasRef}>
                 <div className="categoriaDelet">
-                    <h1 className= "categoria">{category}</h1>
-                    <div onClick={() => deletDiv()}><FontAwesomeIcon className='iconDelete' icon={faTrash} size="lg" style={{color: "#df3030",}} /></div>
+                    <h1 className= "categoria" id={category}>{category}</h1>
+                    <div onClick={deleteDiv}><FontAwesomeIcon className='iconDelete' icon={faCircleXmark} style={{color: "#e82121",}} /></div>
                 </div>
                 <br /><br />
                 {

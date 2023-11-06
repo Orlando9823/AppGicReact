@@ -22,19 +22,25 @@ export const AgregarCategoria = ({setCategoria}) => {
             }
         });
         setInputValue('');
-
-
     }
 
+
     return (
-        <form onSubmit = {onSubmit}>
-            <button onClick={onSubmit}>Buscar</button>
-            <input 
-                type = "text" 
-                placeholder = "Burcar Gif"
-                value = {inputValue}
-                onChange = {onInputChange}
-            />
-        </form>
+        <>
+            <form onSubmit = {onSubmit}>
+                <button onClick={onSubmit}>Buscar</button>
+                <input 
+                    type = "text" 
+                    placeholder = "Burcar Gif"
+                    value = {inputValue}
+                    onChange = {onInputChange}
+                />
+            </form>
+            
+            
+        </>
+        
+
+        
     )
 }
